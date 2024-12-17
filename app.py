@@ -1,13 +1,41 @@
-import sqlite3
-
-connection = sqlite3.connect('social.db')
-cursor = connection.cursor()
 
 sql_commands = [
     """
+
+
+
+
+    CREATE TABLE Friendship (
+        FriendshipID INT PRIMARY KEY,
+        UserID1 INT,
+        UserID2 INT,
+        Timestamp TIMESTAMP,
+        FOREIGN KEY (UserID1) REFERENCES User(UserID),
+        FOREIGN KEY (UserID2) REFERENCES User(UserID)
+    );
+
+
+    CREATE TABLE Message (
+        MessageID INT PRIMARY KEY,
+        SenderID INT,
+        ReceiverID INT,
+        Content TEXT,
+        Timestamp TIMESTAMP,
+        FOREIGN KEY (SenderID) REFERENCES User(UserID),
+        FOREIGN KEY (ReceiverID) REFERENCES User(UserID)
+    );
+
+
+
+
+
+
+
+
     CREATE TABLE IF NOT EXISTS User (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
+        user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT NOT NULL,
+
         nickname TEXT,
         email TEXT UNIQUE NOT NULL,
         phone TEXT NOT NULL,
